@@ -12,25 +12,46 @@ import img3 from "@/public/images/OneDayTour/Humantay/humantay3.jpg";
 import img4 from "@/public/images/OneDayTour/Humantay/humantay4.webp";
 import img5 from "@/public/images/OneDayTour/Humantay/humantay5.jpg";
 
-/* Interfaz de traducciones para esta página */
+interface Block {
+  subtitle: string;
+  items: string[];
+}
+
 interface TranslationContent {
   generalTitle: string;
   tripOverview: {
     title: string;
-    content: string;
-  };
-  itinerarySummary: {
-    title: string;
-    days: {
-      title: string;
-      steps: { text: string }[];
-    }[];
+    paragraphs: string[];
+    highlights: string[];
   };
   itinerary: {
     title: string;
-    text: React.ReactNode;
-    services: string[];
-  }[];
+    steps: string[];
+  };
+  details: {
+    title: string;
+    rows: { label: string; value: string }[];
+  };
+  incluye: {
+    title: string;
+    blocks: Block[];
+    exclusions: string[];
+  };
+  queLlevar: {
+    title: string;
+    blocks: Block[];
+  };
+  fechasSalida: {
+    title: string;
+    schedule: string[];
+    pickupTime: string;
+  };
+  precios: {
+    title: string;
+    serviceNote: string;
+    rates: { group: string; price: string }[];
+    footnote: string;
+  };
   information: {
     price: string;
     duration: string;
@@ -38,189 +59,244 @@ interface TranslationContent {
     maxAltitude: string;
     lodging: string;
     food: string;
+    whatsappMessage: string;
+    bookNow: string;
   };
-
-  incluye: string;
-  queLlevar: string;
-  fechasSalida: string;
-  precios: string;
-  
 }
 
-/* Imágenes globales */
 const globalImages = {
   mapImage: imgMain.src,
   smallImages: [img1.src, img2.src, img3.src, img4.src, img5.src],
 };
 
-/* Objeto de traducciones en español e inglés */
 const translations: { es: TranslationContent; en: TranslationContent } = {
   es: {
     generalTitle: "Tour a la Laguna Humantay (Full Day)",
     tripOverview: {
-      title: "Resumen del Viaje",
-      content:
-        "Un día lleno de hermosos paisajes en la caminata a la Laguna Humantay es imperdible, atrévete a estar muy cerca del nevado Salkantay.\n\n" +
-        "Esta es la segunda montaña más alta de Cusco (6271 m.s.n.m.) y el Nevado Humantay (5473 m.s.n.m.) que protege tan linda Laguna.\n\n" +
-        "El ascenso hacia la Laguna Humantay nos hará entender por qué debemos cuidar la naturaleza. Vive esta Realidad Natural.",
+      title: "Resumen del Tour",
+      paragraphs: [
+        "Un día lleno de hermosos paisajes en la caminata a la Laguna Humantay es imperdible, atrévete a estar muy cerca del nevado Salkantay.",
+        "Esta es la segunda montaña más alta de Cusco (6 271 m.s.n.m.) y el Nevado Humantay (5 473 m.s.n.m.) que protege a tan linda laguna.",
+        "El ascenso hacia la Laguna Humantay nos hará entender por qué debemos cuidar la naturaleza. Vive esta realidad natural.",
+      ],
+      highlights: [
+        "Admira el imponente Nevado Salkantay y maravíllate con Humantay.",
+        "Contempla las aguas turquesas de la Laguna Humantay.",
+        "Explora la flora y fauna de los Andes.",
+        "Observa el reflejo de los nevados en las aguas cristalinas.",
+        "Disfruta de un día en calma y armonía.",
+        "Conecta con la energía de la Pachamama.",
+      ],
     },
-    itinerarySummary: {
-      title: "Resumen del Itinerario",
-      days: [
+    itinerary: {
+      title: "Itinerario Detallado",
+      steps: [
+        "05:00 AM – Pickup en hotel y viaje de 3 h a Mollepata (2 900 m.s.n.m.)",
+        "Desayuno continental en Mollepata",
+        "Traslado a Soraypampa (3 850 m.s.n.m.) e inicio de caminata (opción caballo)",
+        "Trek de 3 km, observación de flora y fauna",
+        "Almuerzo picnic junto a la laguna (4 200 m.s.n.m.) y ritual de hojas de coca",
+        "Descenso a Soraypampa y traslado a Mollepata",
+        "Almuerzo buffet en Mollepata y regreso a Cusco (aprox. 05:00 PM)",
+      ],
+    },
+    details: {
+      title: "Detalles del Tour",
+      rows: [
+        { label: "Comidas", value: "Desayuno continental, snacks y almuerzo fresco" },
+        { label: "Distancia", value: "7 km" },
+        { label: "Altitud mínima", value: "2 900 m.s.n.m." },
+        { label: "Altitud máxima", value: "4 200 m.s.n.m." },
+        { label: "Dificultad", value: "Moderada" },
+        { label: "Duración", value: "12 horas" },
+        { label: "Salida", value: "Cusco (05:00 AM)" },
+        { label: "Retorno", value: "Cusco (05:00 PM)" },
+      ],
+    },
+    incluye: {
+      title: "¿Qué incluye?",
+      blocks: [
         {
-          title: "Día Único: Cusco - Laguna Humantay - Cusco",
-          steps: [
-            { text: "Salida desde Cusco en bus" },
-            { text: "Desayuno" },
-            { text: "Caminata por senderos andinos" },
-            { text: "Llegada a la Laguna Humantay" },
-            { text: "Almuerzo" },
-            { text: "Regreso a Cusco en bus" },
-          ],
+          subtitle: "Personal altamente calificado",
+          items: ["Guía profesional", "Asistente de guía turístico para grupos > 9 personas"],
+        },
+        {
+          subtitle: "Kit de emergencia",
+          items: ["Botellas de oxígeno", "Botiquín de primeros auxilios"],
+        },
+        {
+          subtitle: "Permisos e ingresos",
+          items: ["Ticket de ingreso a la Laguna Humantay"],
+        },
+        {
+          subtitle: "Comidas",
+          items: ["1 desayuno & 1 almuerzo"],
+        },
+        {
+          subtitle: "Transporte",
+          items: ["Transporte ida y vuelta"],
+        },
+      ],
+      exclusions: ["Agua", "Propinas", "Seguro de viaje (altamente recomendado)"],
+    },
+    queLlevar: {
+      title: "Qué llevar",
+      blocks: [
+        {
+          subtitle: "Esenciales",
+          items: ["Dinero en efectivo (recuerdos, bebidas y propinas)", "Protector solar (SPF 50+)", "Desinfectante de manos", "Sombrero", "Snacks"],
+        },
+        {
+          subtitle: "Ropa",
+          items: ["Camisetas/T‑shirt", "Pantalón de senderismo", "Polar térmico", "Zapatillas cómodas", "Chaqueta impermeable/poncho", "Toalla de secado rápido"],
+        },
+        {
+          subtitle: "Equipamiento",
+          items: ["Bolsas de plástico (organizar)", "Mochila compacta y eficiente"],
+        },
+        {
+          subtitle: "Recomendado",
+          items: ["Humectante facial", "Medicación personal", "Cámara", "Equipo de lluvia"],
         },
       ],
     },
-    itinerary: [
-      {
-        title: "Itinerario Completo",
-        text: (
-          <>
-            <p>Recojo en su hotel en Cusco. Nuestro transporte privado y guía bilingüe lo recogerán temprano para aprovechar al máximo el día.</p>
-            <p>Viaje en autobús hacia el pueblo de Mollepata. Disfrute de un desayuno andino tradicional en un restaurante local para recargar energías.</p>
-            <p>Continuación del viaje en autobús hasta el campamento base de Soraypampa.</p>
-            <p>Caminata escénica de ascenso a la Laguna Humantay (3 km aproximadamente). Admire las vistas panorámicas de las montañas nevadas, los valles verdes y la flora y fauna local.</p>
-            <p>Tiempo libre en la Laguna Humantay. Maravíllese con el color turquesa intenso de la laguna, tome fotografías impresionantes y disfrute de la tranquilidad del entorno.</p>
-            <p>Descenso de regreso al campamento base de Soraypampa.</p>
-            <p>Almuerzo en Mollepata. Pruebe los sabores auténticos de la cocina peruana en un ambiente acogedor.</p>
-            <p>Regreso a Cusco. Relájese y disfrute del paisaje mientras lo llevamos de vuelta a su hotel.</p>
-          </>
-        ),
-        services: [
-          "Recojo del hotel",
-          "Transporte turístico de ida y vuelta.",
-          "Guía profesional.",
-          "Desayuno y almuerzo Buffet.",
-          "Equipo de primeros auxilios.",
-          "Bastones artesanales",
-        ],
-      },
-    ],
+    fechasSalida: {
+      title: "Fechas de salida",
+      schedule: ["Salidas diarias (mínimo 2 viajeros), cualquier día de la semana"],
+      pickupTime: "04:30 AM – 05:00 AM (según ubicación del hotel)",
+    },
+    precios: {
+      title: "Precios",
+      serviceNote: "Servicio privado, exclusivo y personalizado",
+      rates: [
+        { group: "02 personas", price: "US$ 119.00" },
+        { group: "03 personas", price: "US$ 99.00" },
+        { group: "04 personas", price: "US$ 81.00" },
+        { group: "05 personas", price: "US$ 71.00" },
+        { group: "06+ personas", price: "US$ 66.00" },
+        { group: "9+ personas", price: "US$ 50.00" },
+      ],
+      footnote: "Precios varían según tamaño de grupo. Más info: wamanperutours@gmail.com | WhatsApp +51 958 724 654 (Miriam)",
+    },
     information: {
       price: "USD $23",
       duration: "Excursión de un día",
       difficulty: "Moderada",
       maxAltitude: "4200 m.s.n.m.",
       lodging: "Incluye transporte y recogida en hotel",
-      food: "Desayuno y almuerzo Buffet",
+      food: "Desayuno y almuerzo buffet",
+      whatsappMessage: "Quiero reservar el paquete: ",
+      bookNow: "Reserva Ahora"
     },
-    incluye: 
-      "¿Qué incluye?:\n\n" +
-      "PERSONAL ALTAMENTE CALIFICADO\n" +
-      "• Guía profesional.\n" +
-      "• Asistente de Guía Turístico para grupos de más de 9 personas.\n\n" +
-      "KIT DE EMERGENCIA\n" +
-      "• Botellas de oxígeno.\n" +
-      "• Botiquín de primeros auxilios.\n\n" +
-      "PERMISOS E INGRESOS\n" +
-      "• Ticket de ingreso a la Laguna Humantay.\n\n" +
-      "COMIDAS\n" +
-      "• 1 desayuno & 1 almuerzo.\n\n" +
-      "TRANSPORTE\n" +
-      "• Transporte ida y vuelta.\n\n" +
-      "NO INCLUYE\n" +
-      "• Agua\n" +
-      "• Propinas\n" +
-      "• Seguro de viaje. Se recomienda encarecidamente contratar un seguro de viaje durante la duración del tour.",
-    queLlevar:
-      "¿Qué llevar?:\n\n" +
-      "ESCENCIALES\n" +
-      "• Dinero en efectivo (recuerdos, bebidas y propinas).\n" +
-      "• Protector solar (SPF 50+).\n" +
-      "• Desinfectante de manos.\n" +
-      "• Sombrero.\n" +
-      "• Snacks.\n\n" +
-      "ROPA\n" +
-      "• Camisetas/T-shirt.\n" +
-      "• Pantalón de senderismo.\n" +
-      "• 1 Polar térmico.\n" +
-      "• Zapatillas de senderismo cómodas.\n" +
-      "• Chaqueta impermeable/poncho de lluvia.\n" +
-      "• Toalla (de secado rápido).\n\n" +
-      "EQUIPAMIENTO\n" +
-      "• Bolsas de plástico (para organizar).\n" +
-      "• Buena mochila (más pequeña es mejor).\n\n" +
-      "RECOMENDADO\n" +
-      "• Humectante facial.\n" +
-      "• Medicación personal.\n" +
-      "• Cámara.\n" +
-      "• Equipo de lluvia.",
-    fechasSalida:
-      "Fechas de Salida:\n\n" +
-      "Fecha de salida para la Laguna Humantay:\n" +
-      "• T’INKAY PERU EXPEDITION ofrece SALIDAS DIARIAS, siempre y cuando contemos con un mínimo de 2 viajeros. Además, podemos salir cualquier día de la semana.\n\n" +
-      "Hora de salida para la Laguna Humantay:\n" +
-      "• Salimos de Cusco alrededor de las 04:30 am o 05:00 am, dependiendo de la ubicación de su hotel en Cusco.",
-    precios:
-      "PRECIOS TOUR LAGUNA HUMANTAY FULL DAY\n\n" +
-      "Número de personas    Precio por persona     Acción\n" +
-      "02 personas           US$ 119.00             Reservar\n" +
-      "03 personas           US$ 99.00              Reservar\n" +
-      "04 personas           US$ 81.00              Reservar\n" +
-      "05 personas           US$ 71.00              Reservar\n" +
-      "06 personas o más     US$ 66.00              Reservar\n\n" +
-      "9 PERSONAS A MÁS: US$ 50 POR PERSONA\n" +
-      "Tour en servicio privado.\n" +
-      "Este servicio es exclusivo y personalizado. Los precios varían según el tamaño del grupo. Para más información, consulte a wamanperutours@gmail.com o WhatsApp +51 958724654 (Miriam)."
   },
   en: {
-    generalTitle: "Laguna Humantay Tour (Full Day)",
+    generalTitle: "Humantay Lagoon Tour (Full Day)",
     tripOverview: {
       title: "Trip Overview",
-      content:
-        "Embark on an unforgettable adventure to the stunning Humantay Lagoon, a natural paradise nestled in the heart of the Peruvian Andes. This full-day tour will take you through breathtaking mountain landscapes, picturesque villages, and allow you to experience the majesty of one of the most beautiful lagoons in the world.\n\n" +
-        "The altitude of Humantay Lagoon is approximately 4,200 meters above sea level.",
+      paragraphs: [
+        "A full day of breathtaking landscapes on the trek to Humantay Lagoon is unmissable. Get close to Salkantay Mountain.",
+        "Humantay Lagoon sits at 4 200 m above sea level, surrounded by Andean peaks.",
+        "This ascent will remind you why we must protect nature. Experience this natural reality.",
+      ],
+      highlights: [
+        "Admire Salkantay and Humantay peaks.",
+        "Marvel at the turquoise waters.",
+        "Explore Andean flora & fauna.",
+        "Capture panoramic photos.",
+        "Enjoy peace away from the city.",
+        "Connect with Pachamama’s energy.",
+      ],
     },
-    itinerarySummary: {
-      title: "Itinerary Overview",
-      days: [
+    itinerary: {
+      title: "Itinerary",
+      steps: [
+        "05:00 AM – Hotel pickup & 3 h drive to Mollepata (2 900 m)",
+        "Continental breakfast in Mollepata",
+        "Transfer to Soraypampa (3 850 m) & start hike (horses optional)",
+        "3 km trek with wildlife spotting",
+        "Picnic lunch at lagoon (4 200 m) & coca leaf ritual",
+        "Descent to Soraypampa & drive to Mollepata",
+        "Buffet lunch in Mollepata & return to Cusco (~05:00 PM)",
+      ],
+    },
+    details: {
+      title: "Tour Details",
+      rows: [
+        { label: "Meals", value: "Continental breakfast, snacks & fresh lunch" },
+        { label: "Distance", value: "7 km" },
+        { label: "Min altitude", value: "2 900 m" },
+        { label: "Max altitude", value: "4 200 m" },
+        { label: "Difficulty", value: "Moderate" },
+        { label: "Duration", value: "12 hours" },
+        { label: "Departure", value: "Cusco (05:00 AM)" },
+        { label: "Return", value: "Cusco (05:00 PM)" },
+      ],
+    },
+    incluye: {
+      title: "What’s included?",
+      blocks: [
         {
-          title: "Single Day: Cusco - Humantay Lagoon - Cusco",
-          steps: [
-            { text: "Departure from Cusco by bus" },
-            { text: "Breakfast" },
-            { text: "Trek through Andean trails" },
-            { text: "Arrival at Humantay Lagoon" },
-            { text: "Lunch" },
-            { text: "Return to Cusco by bus" },
-          ],
+          subtitle: "Highly trained staff",
+          items: ["Professional guide", "Guide assistant for groups > 9 people"],
+        },
+        {
+          subtitle: "Emergency kit",
+          items: ["Oxygen bottles", "First aid kit"],
+        },
+        {
+          subtitle: "Permits & entries",
+          items: ["Entrance ticket to Humantay Lagoon"],
+        },
+        {
+          subtitle: "Meals",
+          items: ["1 breakfast & 1 lunch"],
+        },
+        {
+          subtitle: "Transportation",
+          items: ["Round-trip transport"],
+        },
+      ],
+      exclusions: ["Water", "Tips", "Travel insurance (highly recommended)"],
+    },
+    queLlevar: {
+      title: "What to bring?",
+      blocks: [
+        {
+          subtitle: "Essentials",
+          items: ["Cash (souvenirs, drinks, tips)", "Sunscreen (SPF 50+)", "Hand sanitizer", "Hat", "Snacks"],
+        },
+        {
+          subtitle: "Clothing",
+          items: ["T-shirts", "Hiking pants", "Thermal jacket", "Comfortable shoes", "Rain jacket/poncho", "Quick-dry towel"],
+        },
+        {
+          subtitle: "Equipment",
+          items: ["Plastic bags (organization)", "Compact backpack"],
+        },
+        {
+          subtitle: "Recommended",
+          items: ["Moisturizer", "Personal medication", "Camera", "Rain gear"],
         },
       ],
     },
-    itinerary: [
-      {
-        title: "Full Day Itinerary",
-        text: (
-          <>
-            <p>Pickup from your hotel in Cusco. Our private transport and bilingual guide will pick you up early to make the most of the day.</p>
-            <p>Bus trip to the town of Mollepata. Enjoy a traditional Andean breakfast at a local restaurant to recharge your energy.</p>
-            <p>Continue the bus journey to the Soraypampa base camp.</p>
-            <p>Scenic hike up to Humantay Lagoon (approximately 3 km). Admire panoramic views of snow-capped mountains, green valleys, and local flora and fauna.</p>
-            <p>Free time at Humantay Lagoon. Marvel at its deep turquoise color, capture amazing photos, and enjoy the serenity of the surroundings.</p>
-            <p>Descent back to the Soraypampa base camp.</p>
-            <p>Lunch in Mollepata. Savor the authentic flavors of Peruvian cuisine in a cozy setting.</p>
-            <p>Return to Cusco. Relax and enjoy the scenery as we take you back to your hotel.</p>
-          </>
-        ),
-        services: [
-          "Pickup at hotel",
-          "Round-trip tourist transportation",
-          "Professional guide",
-          "Buffet breakfast and lunch",
-          "First aid kit",
-          "Handmade walking sticks",
-        ],
-      },
-    ],
+    fechasSalida: {
+      title: "Departure Dates",
+      schedule: ["Daily departures (min. 2 travelers), any day of the week"],
+      pickupTime: "04:30 AM – 05:00 AM (depending on hotel location)",
+    },
+    precios: {
+      title: "Prices",
+      serviceNote: "Private, personalized service",
+      rates: [
+        { group: "02 people", price: "US$ 119.00" },
+        { group: "03 people", price: "US$ 99.00" },
+        { group: "04 people", price: "US$ 81.00" },
+        { group: "05 people", price: "US$ 71.00" },
+        { group: "06+ people", price: "US$ 66.00" },
+        { group: "9+ people", price: "US$ 50.00" },
+      ],
+      footnote: "Prices vary by group size. Info: wamanperutours@gmail.com | WhatsApp +51 958 724 654 (Miriam)",
+    },
     information: {
       price: "USD $23",
       duration: "Full Day Tour",
@@ -228,102 +304,41 @@ const translations: { es: TranslationContent; en: TranslationContent } = {
       maxAltitude: "4200 m above sea level",
       lodging: "Includes hotel pickup",
       food: "Buffet breakfast and lunch",
+      whatsappMessage: "I want to book the package: ",
+      bookNow: "Book Now"
     },
-    incluye:
-      "What is included?:\n\n" +
-      "HIGHLY TRAINED STAFF\n" +
-      "• Professional guide\n" +
-      "• Tourist guide assistant for groups over 9 people\n\n" +
-      "EMERGENCY KIT\n" +
-      "• Oxygen bottles\n" +
-      "• First aid kit\n\n" +
-      "PERMITS AND ENTRIES\n" +
-      "• Entrance ticket to Humantay Lagoon\n\n" +
-      "MEALS\n" +
-      "• 1 breakfast & 1 lunch\n\n" +
-      "TRANSPORTATION\n" +
-      "• Round-trip transportation\n\n" +
-      "NOT INCLUDED\n" +
-      "• Water\n" +
-      "• Tips\n" +
-      "• Travel insurance (highly recommended during the tour)",
-    queLlevar:
-      "What to bring?:\n\n" +
-      "ESSENTIALS\n" +
-      "• Cash (for souvenirs, drinks, and tips)\n" +
-      "• Sunscreen (SPF 50+)\n" +
-      "• Hand sanitizer\n" +
-      "• Hat\n" +
-      "• Snacks\n\n" +
-      "CLOTHING\n" +
-      "• T-shirts\n" +
-      "• Hiking pants\n" +
-      "• 1 thermal jacket\n" +
-      "• Comfortable hiking shoes\n" +
-      "• Waterproof jacket/poncho\n" +
-      "• Quick-dry towel\n\n" +
-      "EQUIPMENT\n" +
-      "• Plastic bags (for organization)\n" +
-      "• A compact, efficient backpack\n\n" +
-      "RECOMMENDED\n" +
-      "• Facial moisturizer\n" +
-      "• Personal medication\n" +
-      "• Camera\n" +
-      "• Rain gear",
-    fechasSalida:
-      "Departure Dates:\n\n" +
-      "Departure for Humantay Lagoon:\n" +
-      "• T’INKAY PERU EXPEDITION offers DAILY DEPARTURES as long as we have a minimum of 2 travelers. Departures may occur any day of the week.\n\n" +
-      "Departure Time for Humantay Lagoon:\n" +
-      "• We leave Cusco around 4:30 AM or 5:00 AM, depending on your hotel's location.",
-    precios:
-      "FULL DAY HUMANTAY LAGOON TOUR PRICES\n\n" +
-      "Number of persons    Price per person     Action\n" +
-      "02 persons           US$ 119.00           Book\n" +
-      "03 persons           US$ 99.00            Book\n" +
-      "04 persons           US$ 81.00            Book\n" +
-      "05 persons           US$ 71.00            Book\n" +
-      "06 persons or more   US$ 66.00            Book\n\n" +
-      "More than 9 persons: US$ 50 per person\n" +
-      "Private tour service.\n" +
-      "This service is exclusive and personalized. Prices vary according to your group's size. Please contact wamanperutours@gmail.com or WhatsApp +51 958724654 (Miriam)."
   },
 };
 
 export default function LagunaHumantay() {
-  // Obtener el idioma desde el parámetro de la URL (si es "en", se usa inglés; de lo contrario, español)
   const params = useParams();
   const locale = params.locale === "en" ? "en" : "es";
   const content = translations[locale];
 
   return (
-    <div style={{ display: "flex", gap: "20px" }}>
-      {/* Columna izquierda (70%): Contenido principal */}
+    <div style={{ display: "flex", gap: "50px" }}>
+      {/* Izquierda: 70% */}
       <div style={{ width: "70%" }}>
         <h1>{content.generalTitle}</h1>
-        <Imagenes mapImage={globalImages.mapImage} smallImages={globalImages.smallImages} />
-        {/* El componente Principal se encarga de renderizar el resumen, itinerario y los nuevos contenidos */}
+        <Imagenes
+          mapImage={globalImages.mapImage}
+          smallImages={globalImages.smallImages}
+        />
         <Principal
           tripOverview={content.tripOverview}
-          itinerarySummary={content.itinerarySummary}
           itinerary={content.itinerary}
+          details={content.details}
           incluye={content.incluye}
           queLlevar={content.queLlevar}
           fechasSalida={content.fechasSalida}
           precios={content.precios}
+          locale={locale}
         />
-        
       </div>
-      {/* Columna derecha (30%): Información adicional */}
+
+      {/* Derecha: 30% */}
       <div style={{ width: "30%" }}>
-        <Informacion
-          price={content.information.price}
-          duration={content.information.duration}
-          difficulty={content.information.difficulty}
-          maxAltitude={content.information.maxAltitude}
-          lodging={content.information.lodging}
-          food={content.information.food}
-        />
+        <Informacion {...content.information} locale={locale} generalTitle={content.generalTitle}/>
       </div>
     </div>
   );

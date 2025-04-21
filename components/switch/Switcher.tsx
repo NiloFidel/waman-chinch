@@ -2,6 +2,9 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import styles from "./switcher.module.css";
+import PeruImg from "@/public/images/Landing/peru.png"
+import UsaImg from "@/public/images/Landing/usa.png"
+import Image from "next/image";
 
 export default function LanguageSwitcher({ locale }: { locale: string }) {
   const pathname = usePathname();
@@ -22,14 +25,30 @@ export default function LanguageSwitcher({ locale }: { locale: string }) {
         onClick={() => switchLanguage("es")}
         disabled={locale === "es"}
       >
-        Es
+        <Image 
+          src={PeruImg}
+          alt={`Imagen Peru`}
+          width={30}
+          height={30}
+          quality={100}
+          style={{ objectFit: "cover" }}
+          className={styles.smallImage}
+        ></Image>
       </button>
       <button
         className={`${styles.languageButton} ${locale === "en" ? styles.active : ""}`}
         onClick={() => switchLanguage("en")}
         disabled={locale === "en"}
       >
-        En
+        <Image 
+          src={UsaImg}
+          alt={`Imagen Usa`}
+          width={30}
+          height={30}
+          quality={100}
+          style={{ objectFit: "cover" }}
+          className={styles.smallImage}
+        ></Image>
       </button>
     </div>
   );

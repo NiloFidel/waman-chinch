@@ -10,8 +10,25 @@ interface ImagenesProps {
 
 const Imagenes: React.FC<ImagenesProps> = ({ mapImage, smallImages }) => {
   return (
-    <div className={styles.imageContainer}>
-      <div className={styles.mapImageWrapper}>
+    <div className={styles.gridContainer}>
+      {/* Small images */}
+      {smallImages.slice(0, 3).map((src, idx) => (
+        <div
+          key={idx}
+          className={`${styles.smallWrapper} ${styles[`small${idx + 1}`]}`}
+        >
+          <Image
+            src={src}
+            alt={`Imagen ${idx + 1}`}
+            fill
+            style={{ objectFit: "cover" }}
+            className={styles.smallImage}
+          />
+        </div>
+      ))}
+
+      {/* Map main image */}
+      <div className={styles.mapWrapper}>
         <Image
           src={mapImage}
           alt="Mapa del tour"
@@ -20,19 +37,22 @@ const Imagenes: React.FC<ImagenesProps> = ({ mapImage, smallImages }) => {
           className={styles.mapImage}
         />
       </div>
-      <div className={styles.smallImagesGrid}>
-        {smallImages.map((src, index) => (
-          <div key={index} className={styles.smallImageWrapper}>
-            <Image
-              src={src}
-              alt={`Imagen ${index + 1}`}
-              fill
-              style={{ objectFit: "cover" }}
-              className={styles.smallImage}
-            />
-          </div>
-        ))}
-      </div>
+
+      {/* Remaining small images */}
+      {smallImages.slice(3).map((src, idx) => (
+        <div
+          key={idx + 3}
+          className={`${styles.smallWrapper} ${styles[`small${idx + 4}`]}`}
+        >
+          <Image
+            src={src}
+            alt={`Imagen ${idx + 4}`}
+            fill
+            style={{ objectFit: "cover" }}
+            className={styles.smallImage}
+          />
+        </div>
+      ))}
     </div>
   );
 };

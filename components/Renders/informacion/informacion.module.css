@@ -1,0 +1,75 @@
+.informacionContainer {
+    /* Mantiene el bloque fijo en la posición deseada en la columna lateral */
+    position: sticky;
+    top: 90px;
+    /* Opcionalmente, si se desea que no se pierda de vista, se podría usar fixed:
+       position: fixed;
+       top: 1rem;
+       width: 25%;  (o el ancho deseado)
+    */
+    padding: 1rem;
+    padding-right: 60px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+    margin: 1rem 0;
+  }
+  
+  .header {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #18014e;
+    text-align: center;
+  }
+  
+  .infoList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .infoItem {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .infoItem:last-child {
+    border-bottom: none;
+  }
+  
+  .label {
+    display: flex;
+    align-items: center;
+    flex: 0 0 150px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .icon {
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+    color: #18014e;
+  }
+  
+  .value {
+    flex: 1;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .bookButton{
+    background-color: #18014e;
+    color: white;
+    width: 50%;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 1rem;
+  }
+  .bookButton:hover{
+    cursor: pointer;
+    background-color: rgb(145, 124, 8);
+  }

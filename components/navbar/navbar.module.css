@@ -1,193 +1,182 @@
-/* Variables para mantener consistencia en colores y transiciones */
-/*:root {
-    --primary-color: #18014e;
-    --secondary-color: #3b1b00;
-    --accent-color: #c5a216;
-    --text-color: #ffffff;
-    --hover-bg: #0e0d7a;
-    --dropdown-hover-bg: rgba(42, 255, 14, 0.1);
-  }*/
-  
-  /* Contenedor principal del navbar (sticky para permanecer en la parte superior) */
-  .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: var(--primary-color);
-    width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, padding 0.3s ease;
-  }
-  
-  /* Fila superior: switcher, logo y menú/hamburguesa en la misma línea */
+/* Contenedor principal del navbar (sticky para permanecer en la parte superior) */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #18014e; /* valor de --primary-color */
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, padding 0.3s ease;
+}
+
+/* Fila superior: switcher, logo y menú/hamburguesa en la misma línea */
+.topRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+/* Switcher e ítems del logo */
+.switcher {
+  display: flex;
+  align-items: center;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+/* Botón hamburguesa */
+.hamburger {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #ffffff; /* valor de --text-color */
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0.3rem;
+}
+
+.hamburger:hover {
+  color: #c5a216; /* valor de --accent-color */
+}
+
+/* Menú principal */
+.menu {
+  width: 100%;
+}
+
+/* Lista de navegación */
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Cada item de navegación */
+.navItem {
+  position: relative;
+}
+
+/* Botón de cada item */
+.navItem button {
+  background: none;
+  border: none;
+  color: #ffffff; /* valor de --text-color */
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.navItem button:hover,
+.navItem button:focus {
+  background-color: #0e0d7a; /* valor de --hover-bg */
+  outline: none;
+}
+
+/* Dropdown para escritorio: se posiciona de manera absoluta */
+.dropdown {
+  background-color: #9e3a00;
+  border-radius: 4px;
+  /*padding: 1.5rem 0;*/
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  /*border: solid 2px rebeccapurple;*/
+}
+
+.navItem:hover .dropdown,
+.navItem:focus-within .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown li {
+  list-style: none;
+}
+
+.dropdown li a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #ffffff; /* valor de --text-color */
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown li a:hover {
+  background-color: rgba(42, 255, 14, 0.1); /* valor de --dropdown-hover-bg */
+}
+
+/* Estilos para pantallas pequeñas (móviles) */
+@media (max-width: 767px) {
+  /* La fila superior mantiene switcher, logo y hamburguesa en una sola línea */
   .topRow {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 2rem;
+    padding: 1rem;
   }
-  
-  /* Switcher e ítems del logo */
-  .switcher {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logoContainer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .logo {
-    max-width: 100px;
-    width: 100%;
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .logo:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Botón hamburguesa */
-  .hamburger {
-    font-size: 1.8rem;
-    background: none;
-    border: none;
-    color: var(--text-color);
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding: 0.3rem;
-  }
-  
-  .hamburger:hover {
-    color: var(--accent-color);
-  }
-  
-  /* Menú principal */
+  /* El menú principal se muestra en bloque debajo de la fila superior cuando se abre */
   .menu {
-    width: 100%;
+    display: block;
   }
-  
-  /* Lista de navegación */
   .navList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 1rem;
-    align-items: center; 
-  }
-  
-  /* Cada item de navegación */
-  .navItem {
-    position: relative;
-  }
-  
-  /* Botón de cada item */
-  .navItem button {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
     padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  
-  .navItem button:hover,
-  .navItem button:focus {
-    background-color: var(--hover-bg);
-    outline: none;
+  .navItem button {
+    width: 100%;
+    text-align: left;
   }
-  
-  /* Dropdown para escritorio: se posiciona de manera absoluta */
+  /* Para móviles el dropdown se posiciona de forma estática (en flujo) y se indenta */
   .dropdown {
-    background-color: #9e3a00;
-    border-radius: 4px;
-    /*padding: 1.5rem 0;*/
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 200px;
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    /*border: solid 2px rebeccapurple;*/
-  }
-  
-  /* En escritorio, al pasar el mouse o enfocar el item se muestra el dropdown */
-  .navItem:hover .dropdown,
-  .navItem:focus-within .dropdown {
+    position: static;
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    transition: none;
+    margin-left: 1rem;
+    min-width: auto;
   }
-  .dropdown li {
-    list-style: none;
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
   }
-  
-  .dropdown li a {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dropdown li a:hover {
-    background-color: var(--dropdown-hover-bg);
-  }
-  
-  /* Estilos para pantallas pequeñas (móviles) */
-  @media (max-width: 767px) {
-    /* La fila superior mantiene switcher, logo y hamburguesa en una sola línea */
-    .topRow {
-      padding: 1rem;
-    }
-    /* El menú principal se muestra en bloque debajo de la fila superior cuando se abre */
-    .menu {
-      display: block;
-    }
-    .navList {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.8rem;
-      padding: 0.5rem 1rem;
-    }
-    .navItem button {
-      width: 100%;
-      text-align: left;
-    }
-    /* Para móviles el dropdown se posiciona de forma estática (en flujo) y se indenta */
-    .dropdown {
-      position: static;
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      transition: none;
-      margin-left: 1rem;
-      min-width: auto;
-    }
-  }
-  
-  /* Estilos para pantallas grandes */
-  @media (min-width: 768px) {
-    .hamburger {
-      display: none;
-    }
-  }
-  
-  /* Estados activos y enfoque */
-  .navItem:active button {
-    background-color: rgba(255, 255, 255, 0.25);
-  }
-  
-  .navItem button:focus-visible {
-    outline: 2px solid var(--accent-color);
-  }
-  
+}
+
+/* Estados activos y enfoque */
+.navItem:active button {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navItem button:focus-visible {
+  outline: 2px solid #c5a216; /* valor de --accent-color */
+}

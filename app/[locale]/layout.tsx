@@ -2,6 +2,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import Navbar from "@/components/navbar/navbar";
+import Social from "@/components/social/social"
 
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
@@ -12,6 +13,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     <>
       <Navbar locale={locale} />
       {children}
+      <Social></Social>
     </>
   );
 }

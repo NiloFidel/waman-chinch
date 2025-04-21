@@ -169,7 +169,7 @@ export default function Navbar({ locale }: NavbarProps) {
                   <>
                     <li role="none">
                       <Link
-                        href={`/${locale}/tour-a-machupicchu/mapi-full-day`}
+                        href={`/${locale}/machupicchu/oneDay`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -178,7 +178,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/tour-a-machupicchu/mapi-by-train`}
+                        href={`/${locale}/machupicchu/twoDays`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -187,7 +187,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/tour-a-machupicchu/mapi-by-car`}
+                        href={`/${locale}/machupicchu/hidro`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -250,7 +250,7 @@ export default function Navbar({ locale }: NavbarProps) {
                         onClick={closeDropdown}
                         role="menuitem"
                       >
-                        {t.tourPallcoyo}
+                        {t.perolniyoq}
                       </Link>
                     </li>
                     <li role="none">
@@ -399,6 +399,15 @@ export default function Navbar({ locale }: NavbarProps) {
                         {t.mapi_city}
                       </Link>
                     </li>
+                    <li role="none">
+                      <Link
+                        href={`/${locale}/mostrarServicios`}
+                        onClick={closeDropdown}
+                        role="menuitem"
+                      >
+                        Reservas
+                      </Link>
+                    </li>
                   </>
                 )}
               </li>
@@ -483,7 +492,7 @@ export default function Navbar({ locale }: NavbarProps) {
                       }}
                       role="menuitem"
                     >
-                      {t.tourPallcoyo}
+                      {t.perolniyoq}
                     </Link>
                   </li>
                   <li role="none">
