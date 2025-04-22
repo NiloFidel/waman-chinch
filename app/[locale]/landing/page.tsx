@@ -5,369 +5,301 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./landing.module.css";
-import {
-  FaLeaf,
-  FaStar,
-  FaRecycle,
-  FaHandshake,
-  FaHeart,
-  FaLightbulb,
-} from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
-// Imágenes para las secciones "Misión" y "Visión"
+// Imágenes Misión y Visión
 import imgMission from "@/public/images/Landing/Mision.jpeg";
-import imgVision from "@/public/images/Landing/Vision.jpeg";
+import imgVision  from "@/public/images/Landing/Vision.jpeg";
 
-// Imágenes del hero slider
+// Hero slider images
 import hero1 from "@/public/images/Macchu Picchu/Machu Picchu - Full day/machupichu.jpg";
 import hero2 from "@/public/images/Valle/ValleVIP/valle main.jpg";
 import hero3 from "@/public/images/OneDayTour/CityTour/Qorikancha-Cusco.jpg";
 import hero4 from "@/public/images/CaminoInca/camino2D/main.jpg";
 import hero5 from "@/public/images/OneDayTour/Humantay/humantay-main.webp";
 
+type Locale = "es" | "en";
+
 const heroSlides = [
   {
     image: hero1,
-    es: {
-      title: "Machu Picchu Full Day",
-      buttonText: "Ver más",
-      link: "/es/one-day/machupicchu-full-day",
-    },
-    en: {
-      title: "Machu Picchu Full Day",
-      buttonText: "View more",
-      link: "/en/one-day/machupicchu-full-day",
-    },
+    es: { title: "Machu Picchu Full Day", button: "Ver más", link: "/es/one-day/machupicchu-full-day" },
+    en: { title: "Machu Picchu Full Day", button: "View more", link: "/en/one-day/machupicchu-full-day" },
   },
   {
     image: hero2,
-    es: {
-      title: "Valle Sagrado VIP",
-      buttonText: "Ver más",
-      link: "/es/one-day/valle-sagrado-vip",
-    },
-    en: {
-      title: "Sacred Valley VIP",
-      buttonText: "View more",
-      link: "/en/one-day/valle-sagrado-vip",
-    },
+    es: { title: "Valle Sagrado VIP", button: "Ver más", link: "/es/one-day/valle-sagrado-vip" },
+    en: { title: "Sacred Valley VIP", button: "View more", link: "/en/one-day/valle-sagrado-vip" },
   },
   {
     image: hero3,
-    es: {
-      title: "City Tour",
-      buttonText: "Ver más",
-      link: "/es/one-day/city-tour-cusco",
-    },
-    en: {
-      title: "City Tour",
-      buttonText: "View more",
-      link: "/en/one-day/city-tour-cusco",
-    },
+    es: { title: "City Tour", button: "Ver más", link: "/es/one-day/city-tour-cusco" },
+    en: { title: "City Tour", button: "View more", link: "/en/one-day/city-tour-cusco" },
   },
   {
     image: hero4,
-    es: {
-      title: "Camino Inca 2D/1N",
-      buttonText: "Ver más",
-      link: "/es/one-day/camino-inca-2d",
-    },
-    en: {
-      title: "Inca Trail 2D/1N",
-      buttonText: "View more",
-      link: "/en/one-day/inca-trail-2d",
-    },
+    es: { title: "Camino Inca 2D/1N", button: "Ver más", link: "/es/one-day/camino-inca-2d" },
+    en: { title: "Inca Trail 2D/1N", button: "View more", link: "/en/one-day/inca-trail-2d" },
   },
   {
     image: hero5,
-    es: {
-      title: "Laguna Humantay",
-      buttonText: "Ver más",
-      link: "/es/one-day/laguna-humantay",
-    },
-    en: {
-      title: "Humantay Lagoon",
-      buttonText: "View more",
-      link: "/en/one-day/humantay-lagoon",
-    },
+    es: { title: "Laguna Humantay", button: "Ver más", link: "/es/one-day/laguna-humantay" },
+    en: { title: "Humantay Lagoon", button: "View more", link: "/en/one-day/humantay-lagoon" },
   },
 ];
 
-interface TranslationContent {
-  mission: {
-    title: string;
-    content: string;
-  };
-  vision: {
-    title: string;
-    content: string;
-  };
-  values: {
-    title: string;
-    list: { title: string; description: string }[];
-  };
-  about: {
-    title: string;
-    content: string;
-  };
+interface Translations {
+  welcome:   { title: string; lines: string[] };
+  mission:   { title: string; content: string };
+  vision:    { title: string; content: string };
+  values:    { title: string; list: string[] };
+  time:      { title: string; items: string[] };
+  weather:   { title: string; paragraphs: string[] };
+  why:       { title: string; bullets: string[] };
+  contact:   { title: string; methods: string[] };
 }
 
-const translations: { es: TranslationContent; en: TranslationContent } = {
+const translations: Record<Locale, Translations> = {
   es: {
+    welcome: {
+      title: "Bienvenida",
+      lines: [
+        "Waman Perú Tours somos una agencia de viajes y Tour Operador Local con base en Cusco – Perú, realizamos el sueño de miles de personas que llegaron como tú para una merecida vacaciones.",
+        "Organizamos tours en grupo y viajes personalizados a medida, en servicio compartido o privado.",
+        "Ofrecemos alternativas para personas mayores (en silla de ruedas) y niños pequeños, priorizando siempre su seguridad y calidad de servicio.",
+        "Tenemos los mejores viajes de un día, excursiones o paquetes de trekking que se adapten a sus necesidades.",
+      ],
+    },
     mission: {
       title: "Misión",
       content:
-        "Preservar y proteger nuestro patrimonio cultural y natural mediante un turismo responsable, conectando a los viajeros con la esencia andina.",
+        "Ofrecer un servicio personalizado de calidad y confiabilidad, diseñando experiencias únicas a precios competitivos, manteniendo los principios de sostenibilidad y turismo responsable en todos nuestros destinos.",
     },
     vision: {
       title: "Visión",
       content:
-        "Ser la agencia líder en Cusco, ofreciendo experiencias únicas y sostenibles y sirviendo de puente entre el mundo y la cultura andina.",
+        "Ser reconocida como la agencia tour operadora líder en la región del Cusco, enriquecer cada experiencia vacacional y contribuir al desarrollo social, cultural y económico de las comunidades.",
     },
     values: {
-      title: "Valores de QORI WAYRA TRAVEL",
+      title: "Valores",
       list: [
-        {
-          title: "Respeto por la cultura y la naturaleza",
-          description:
-            "Valoramos nuestras raíces andinas y el entorno natural, promoviendo su preservación en cada experiencia.",
-        },
-        {
-          title: "Compromiso con la calidad",
-          description:
-            "Ofrecemos un servicio personalizado y de excelencia, cuidando cada detalle.",
-        },
-        {
-          title: "Turismo responsable y sostenible",
-          description:
-            "Fomentamos un turismo que beneficie a las comunidades y minimice el impacto ambiental.",
-        },
-        {
-          title: "Integridad y transparencia",
-          description:
-            "Actuamos con ética y responsabilidad, construyendo relaciones de confianza.",
-        },
-        {
-          title: "Pasión por el servicio",
-          description:
-            "Transmitimos calidez y autenticidad en cada viaje, disfrutando lo que hacemos.",
-        },
-        {
-          title: "Innovación con identidad",
-          description:
-            "Exploramos nuevas formas de mostrar el Perú sin perder nuestra esencia cultural.",
-        },
+        "Innovación","Humildad","Integridad","Compromiso","Superación",
+        "Fuerza","Lealtad","Colaboración","Generosidad","Puntualidad",
+        "Solidaridad","Respeto","Honestidad","Servicio","Disciplina","Excelencia"
       ],
     },
-    about: {
-      title: "Nosotros",
-      content: `Somos una agencia de viajes comprometida con brindar experiencias inolvidables en Cusco y sus alrededores. Nuestro enfoque se centra en el turismo responsable y sostenible, conectando a los viajeros con la riqueza cultural y natural de la región.
-      
-Nuestra misión es ofrecer servicios de calidad, adaptados a las necesidades de cada cliente, garantizando seguridad y excelencia en cada viaje.
-      
-Con un equipo apasionado y profesional, nos esforzamos por ser el puente entre el mundo y el Perú, transformando cada aventura en una experiencia única y enriquecedora.`,
+    time: {
+      title: "Tiempo",
+      items: [
+        "Horario de atención: 08:00 AM – 08:00 PM",
+        "Reservas 24/7 vía WhatsApp",
+        "Respuesta a consultas en menos de 2 horas",
+      ],
+    },
+    weather: {
+      title: "¿Cómo está el tiempo en Perú?",
+      paragraphs: [
+        "Costa: clima desértico con niebla de invierno (may–oct) y veranos cálidos (dic–abr).",
+        "Sierra: estación seca (abr–oct) con días soleados y noches frías; lluvias (nov–mar).",
+        "Amazonas: clima tropical con temporada seca (abr–oct) y lluvias intensas (nov–mar).",
+      ],
+    },
+    why: {
+      title: "¿Por qué reservar con nosotros?",
+      bullets: [
+        "Operadores de turismo locales en Cusco.",
+        "Vehículos 100% turísticos y guías oficiales bilingües.",
+        "Compromiso con la seguridad y el medio ambiente.",
+        "Grupos reducidos y servicios altamente personalizados.",
+        "Sin precios ocultos y atención familiar.",
+      ],
+    },
+    contact: {
+      title: "Contacto",
+      methods: [
+        "Email: info@wamanperutours.com",
+        "Teléfono: +51 958 724 654",
+        "Web: www.wamanperutours.com",
+      ],
     },
   },
   en: {
+    welcome: {
+      title: "Welcome",
+      lines: [
+        "Waman Peru Tours is a Cusco-based local tour operator, making the dream of thousands come true for well-deserved vacations.",
+        "We organize group tours and tailor-made private or shared trips.",
+        "We offer options for seniors (wheelchair accessible) and young children, always prioritizing safety and service quality.",
+        "We have the best one-day trips, excursions, and trekking packages to suit your needs.",
+      ],
+    },
     mission: {
       title: "Mission",
       content:
-        "To preserve and protect our cultural and natural heritage through responsible tourism, connecting travelers with the Andean essence.",
+        "Provide personalized, reliable service by crafting unique experiences at competitive prices, upholding sustainability and responsible tourism in all destinations.",
     },
     vision: {
       title: "Vision",
       content:
-        "To be the leading travel agency in Cusco, offering unique and sustainable experiences and serving as a bridge between the world and Andean culture.",
+        "Be recognized as the leading tour operator in the Cusco region, enriching every vacation experience and contributing to social, cultural, and economic development.",
     },
     values: {
-      title: "Values of QORI WAYRA TRAVEL",
+      title: "Values",
       list: [
-        {
-          title: "Respect for Culture and Nature",
-          description:
-            "We value our Andean roots and natural environment, promoting their preservation in every experience.",
-        },
-        {
-          title: "Commitment to Quality",
-          description:
-            "We provide personalized, high-quality service, taking care of every detail.",
-        },
-        {
-          title: "Responsible and Sustainable Tourism",
-          description:
-            "We foster tourism that benefits local communities and minimizes environmental impact.",
-        },
-        {
-          title: "Integrity and Transparency",
-          description:
-            "We act with ethics and responsibility, building trusting relationships.",
-        },
-        {
-          title: "Passion for Service",
-          description:
-            "We deliver warm and genuine attention in every journey, loving what we do.",
-        },
-        {
-          title: "Innovation with Identity",
-          description:
-            "We explore new ways to showcase Peru while staying true to our cultural essence.",
-        },
+        "Innovation","Humility","Integrity","Commitment","Growth",
+        "Strength","Loyalty","Collaboration","Generosity","Punctuality",
+        "Solidarity","Respect","Honesty","Service","Discipline","Excellence"
       ],
     },
-    about: {
-      title: "About Us",
-      content: `We are a travel agency committed to providing unforgettable experiences in Cusco and its surroundings. Our focus is on responsible and sustainable tourism, connecting travelers with the cultural and natural richness of the region.
-      
-Our mission is to offer quality services, tailored to the needs of each client, ensuring safety and excellence in every journey.
-      
-With a passionate and professional team, we strive to be the bridge between the world and Peru, turning every adventure into a unique and enriching experience.`,
+    time: {
+      title: "Hours",
+      items: [
+        "Service: 08:00 AM – 08:00 PM",
+        "24/7 WhatsApp reservations",
+        "Response time under 2 hours",
+      ],
+    },
+    weather: {
+      title: "Weather in Peru",
+      paragraphs: [
+        "Coast: desert climate with winter fog (May–Oct) and warm summers (Dec–Apr).",
+        "Highlands: dry season (Apr–Oct) with sunny days and cold nights; rains (Nov–Mar).",
+        "Amazon: tropical climate with dry season (Apr–Oct) and heavy rains (Nov–Mar).",
+      ],
+    },
+    why: {
+      title: "Why Book With Us?",
+      bullets: [
+        "Local tour operators in Cusco.",
+        "100% tourist‑grade vehicles and official bilingual guides.",
+        "Commitment to safety and sustainability.",
+        "Small groups and highly personalized service.",
+        "No hidden costs and family‑friendly care.",
+      ],
+    },
+    contact: {
+      title: "Contact Us",
+      methods: [
+        "Email: info@wamanperutours.com",
+        "Phone: +51 958 724 654",
+        "Web: www.wamanperutours.com",
+      ],
     },
   },
 };
 
 export default function LandingPage() {
-  const pathname = usePathname();
-  const locale = (pathname.split("/")[1] as "es" | "en") || "es";
+  const raw = usePathname().split("/")[1] as Locale;
+  const locale: Locale = raw === "en" ? "en" : "es";
   const t = translations[locale];
 
-  const [currentHero, setCurrentHero] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentHero((prev) => (prev + 1) % heroSlides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentHero((prev) => (prev === 0 ? heroSlides.length - 1 : prev - 1));
-  };
+  const [slide, setSlide] = useState(0);
+  const next  = () => setSlide(s => (s + 1) % heroSlides.length);
+  const prev  = () => setSlide(s => (s === 0 ? heroSlides.length - 1 : s - 1));
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentHero((prev) => (prev + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const iv = setInterval(next, 5000);
+    return () => clearInterval(iv);
   }, []);
 
   return (
     <div className={styles.container}>
-      {/* Hero Slider */}
+      {/* Hero */}
       <div className={styles.heroSlider}>
-        {heroSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`${styles.heroSlide} ${
-              index === currentHero ? styles.activeSlide : ""
-            }`}
-          >
-            <Image
-              src={slide.image}
-              alt={`Slide ${index + 1}`}
-              fill
-              className={styles.heroImage}
-              priority={index === 0}
-            />
-            <div className={styles.heroTopLeft}>
-              <span className={styles.bestSeller}>Best Seller</span>
-            </div>
+        {heroSlides.map((s, i) => (
+          <div key={i} className={`${styles.heroSlide} ${i === slide ? styles.active : ""}`}>
+            <Image src={s.image} alt={s[locale].title} fill className={styles.heroImage} priority />
             <div className={styles.heroOverlay}>
-              <h2 className={styles.heroTitle}>{slide[locale].title}</h2>
-              <Link href={slide[locale].link}>
-                <button className={styles.heroButton}>
-                  {slide[locale].buttonText}
-                </button>
+              <h2 className={styles.heroTitle}>{s[locale].title}</h2>
+              <Link href={s[locale].link}>
+                <button className={styles.heroButton}>{s[locale].button}</button>
               </Link>
             </div>
           </div>
         ))}
-        <button className={styles.prevArrow} onClick={prevSlide}>
-          &#10094;
-        </button>
-        <button className={styles.nextArrow} onClick={nextSlide}>
-          &#10095;
-        </button>
+        <button className={styles.prev} onClick={prev}>&#10094;</button>
+        <button className={styles.next} onClick={next}>&#10095;</button>
       </div>
 
-      {/* Contenedor principal */}
-      <div className={styles.contentContainer}>
-        {/* Columna Izquierda: Nosotros, Misión y Visión */}
-        <div className={styles.leftColumn}>
-          {/* Sección Nosotros */}
-          <div className={styles.aboutSection}>
-            <h2 className={styles.aboutTitle}>{t.about.title}</h2>
-            {t.about.content.split("\n").map((para, i) => (
-              <p key={i} className={styles.aboutText}>
-                {para}
-              </p>
+      {/* Main Grid */}
+      <div className={styles.mainContent}>
+        {/* Welcome */}
+        <section className={styles.welcome}>
+          <h2 className={styles.sectionTitle}>{t.welcome.title}</h2>
+          {t.welcome.lines.map((l, idx) => (
+            <p key={idx} className={styles.text}>{l}</p>
+          ))}
+        </section>
+
+        {/* Misión + Visión */}
+        <div className={styles.missionVision}>
+          {[t.mission, t.vision].map((block, i) => (
+            <div key={i} className={styles.card}>
+              <Image
+                src={i === 0 ? imgMission : imgVision}
+                alt={block.title}
+                fill
+                className={styles.cardImg}
+              />
+              <div className={styles.cardContent}>
+                <h3 className={styles.cardTitle}>{block.title}</h3>
+                <p className={styles.text}>{block.content}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Valores */}
+        <section className={styles.values}>
+          <h2 className={styles.sectionTitle}>{t.values.title}</h2>
+          <div className={styles.valuesList}>
+            {t.values.list.map((val, i) => (
+              <div key={i} className={styles.valueItem}>
+                <FaStar className={styles.icon} />
+                <span className={styles.text}>{val}</span>
+              </div>
             ))}
           </div>
+        </section>
 
-          {/* Misión y Visión en una misma columna */}
-          <div className={styles.missionVisionContainer}>
-            {/* Tarjeta de Misión */}
-            <div className={styles.card}>
-              <div className={styles.imageContainer}>
-                <Image
-                  src={imgMission}
-                  alt="Misión"
-                  width={1000}
-                  height={1000}
-                  quality={100}
-                  className={styles.image}
-                  priority
-                />
-              </div>
-              <div className={styles.cardContent}>
-                <h2 className={styles.title}>{t.mission.title}</h2>
-                <p className={styles.text}>{t.mission.content}</p>
-              </div>
-            </div>
-
-            {/* Tarjeta de Visión */}
-            <div className={styles.card}>
-              <div className={styles.imageContainer}>
-                <Image
-                  src={imgVision}
-                  alt="Visión"
-                  width={1000}
-                  height={1000}
-                  quality={100}
-                  className={styles.image}
-                  priority
-                />
-              </div>
-              <div className={styles.cardContent}>
-                <h2 className={styles.title}>{t.vision.title}</h2>
-                <p className={styles.text}>{t.vision.content}</p>
-              </div>
-            </div>
+        {/* Tiempo y Contacto */}
+        <section className={styles.sideInfo}>
+          <div className={styles.time}>
+            <h2 className={styles.sectionTitle}>{t.time.title}</h2>
+            <ul className={styles.textList}>
+              {t.time.items.map((it, i) => (
+                <li key={i} className={styles.text}>{it}</li>
+              ))}
+            </ul>
           </div>
-        </div>
+          <div className={styles.contact}>
+            <h2 className={styles.sectionTitle}>{t.contact.title}</h2>
+            <ul className={styles.textList}>
+              {t.contact.methods.map((m, i) => (
+                <li key={i} className={styles.text}>{m}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
 
-        {/* Columna Derecha: Valores */}
-        <div className={styles.rightColumn}>
-          <h2 className={styles.subtitle}>{t.values.title}</h2>
-          <ul className={styles.valuesList}>
-            {t.values.list.map((value, index) => {
-              const IconComponent = [
-                FaLeaf,
-                FaStar,
-                FaRecycle,
-                FaHandshake,
-                FaHeart,
-                FaLightbulb,
-              ][index];
-              return (
-                <li key={index} className={styles.valueItem}>
-                  <div className={styles.valueHeader}>
-                    <IconComponent className={styles.valueIcon} />
-                    <h3 className={styles.valueTitle}>{value.title}</h3>
-                  </div>
-                  <p className={styles.valueText}>{value.description}</p>
-                </li>
-              );
-            })}
+        {/* Weather */}
+        <section className={styles.weather}>
+          <h2 className={styles.sectionTitle}>{t.weather.title}</h2>
+          {t.weather.paragraphs.map((p, i) => (
+            <p key={i} className={styles.text}>{p}</p>
+          ))}
+        </section>
+
+        {/* Why Book */}
+        <section className={styles.whyBook}>
+          <h2 className={styles.sectionTitle}>{t.why.title}</h2>
+          <ul className={styles.bulletList}>
+            {t.why.bullets.map((b, i) => (
+              <li key={i} className={styles.text}>• {b}</li>
+            ))}
           </ul>
-        </div>
+        </section>
       </div>
     </div>
-  );
+);
 }

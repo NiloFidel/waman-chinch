@@ -1,31 +1,48 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-const locales = ['en', 'es', 'de', 'fr'];
-const defaultLocale = 'en';
+// 1. Definir tipos seguros
+const locales = ['es', 'en'] as const;
+type Locale = typeof locales[number];
+const defaultLocale: Locale = 'es';
+const protectedRoutes = ['/camino-inca/camino-inca-2d']; // Rutas que requieren validación estricta
 
-function getLocale(request: NextRequest): string {
-  const acceptLanguage = request.headers.get('accept-language');
-  if (!acceptLanguage) return defaultLocale;
-
-  const acceptedLocales = acceptLanguage.split(',').map((lang) => lang.split(';')[0]);
-  return locales.find((locale) => acceptedLocales.includes(locale)) || defaultLocale;
-}
+// 2. Función de validación de locale
+const validateLocale = (locale: string): locale is Locale => {
+  return locales.includes(locale as Locale);
+};
 
 export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+  const url = request.nextUrl.clone();
+  const { pathname } = url;
+  const pathSegments = pathname.split('/').filter(Boolean);
 
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  );
+  // 3. Validación y corrección del locale
+  const locale = validateLocale(pathSegments[0]) ? pathSegments[0] : defaultLocale;
 
-  if (pathnameHasLocale) return NextResponse.next();
+  // 4. Redirecciones estratégicas
+  if (pathname === '/' || pathSegments.length === 0) {
+    url.pathname = `/${locale}/landing`;
+    return NextResponse.redirect(url);
+  }
 
-  const locale = getLocale(request);
-  request.nextUrl.pathname = `/${locale}${pathname}`;
-  return NextResponse.redirect(request.nextUrl);
+  // 5. Forzar locale válido en rutas protegidas
+  if (protectedRoutes.some(route => pathname.includes(route)) && !validateLocale(pathSegments[0])) {
+    url.pathname = pathname.replace(/^\/(.*?)(\/|$)/, `/${locale}/`);
+    return NextResponse.redirect(url);
+  }
+
+  // 6. Asegurar formato de URL
+  if (!validateLocale(pathSegments[0])) {
+    url.pathname = `/${locale}${pathname}`;
+    return NextResponse.redirect(url);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next|favicon.ico).*)'],
+  matcher: [
+    '/',
+    '/((?!_next|api|favicon.ico|assets|images).*)'
+  ]
 };

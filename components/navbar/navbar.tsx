@@ -210,7 +210,7 @@ export default function Navbar({ locale }: NavbarProps) {
                   <>
                     <li role="none">
                       <Link
-                        href={`/${locale}/valle-sagrado/valle-sagrado-vip`}
+                        href={`/${locale}/OneDay/valleVIP`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -219,7 +219,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/valle-sagrado/valle-sagrado-tradicional`}
+                        href={`/${locale}/OneDay/valleTradicional`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -228,7 +228,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/siete-lagunas`}
+                        href={`/${locale}/OneDay/7lagunas`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -237,7 +237,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/waqrapukara`}
+                        href={`/${locale}/OneDay/waqrapucara`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -246,7 +246,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/tour-palccoyo`}
+                        href={`/${locale}/OneDay/perolniyoq`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -264,7 +264,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/siete-colores`}
+                        href={`/${locale}/OneDay/7colores`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -288,7 +288,7 @@ export default function Navbar({ locale }: NavbarProps) {
                   <>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/city-tour-cusco`}
+                        href={`/${locale}/midDay/cityTour`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -297,7 +297,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/valle-sagrado/maras-moray`}
+                        href={`/${locale}/midDay/maras`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -306,7 +306,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/valle-sagrado/valle-sagrado-sur`}
+                        href={`/${locale}/midDay/valleSur`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -315,7 +315,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                     <li role="none">
                       <Link
-                        href={`/${locale}/one-day/tour-mistico`}
+                        href={`/${locale}/midDay/mistico`}
                         onClick={closeDropdown}
                         role="menuitem"
                       >
@@ -325,7 +325,7 @@ export default function Navbar({ locale }: NavbarProps) {
                   </>
                 )}
               </li>
-              <li className={styles.navItem}>
+              {/*<li className={styles.navItem}>
                 <button
                   onClick={() => toggleDropdown("inca")}
                   aria-haspopup="true"
@@ -410,7 +410,7 @@ export default function Navbar({ locale }: NavbarProps) {
                     </li>
                   </>
                 )}
-              </li>
+              </li>*/}
             </ul>
           </div>
         )}
